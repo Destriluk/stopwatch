@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="time">00:00:00</h1>
+    <button onclick="startwatch()">Start</button>
+    <button onclick="stopwatch()">stop</button>
+    <button onclick="Resetwatch">Reset</button>
+    <script>
+        let timer = null
+        let seconds = 0
+        function startwatch(){
+            if(timer) return 
+            timer = setInterval(() => {                                                                                
+                seconds++
+                document.getElementById('time').innerHTML = formattime(seconds)
+
+            }, 1000)
+        }
+        function stopwatch(){
+            clearInterval(timer)
+            timer = null
+        }
+        function Resetwatch(){
+            stopwatch()
+            seconds = 0
+             document.getElementById('time').innerHTML = "00:00:00"
+        }
+        function formattime(sec){
+            let hrs = Math.floor(sec / 3600)
+            let min = Math.floor((sec % 3600)/60)
+            let secs = sec % 60
+            return(
+                String(hrs).padStart(2, '0') + ":" + 
+                String(min).padStart(2, '0') + ":" + 
+                String(secs).padStart(2, '0') 
+            )
+        }
+    </script>
+</body>
+</html>
